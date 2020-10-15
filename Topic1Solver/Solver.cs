@@ -116,12 +116,12 @@ namespace Topic1Solver
                 objectRating.Add(rat);
             }
 
-            WriteToFile(choicerCoef, listCriteriaCoef, listObjectCoef);
+            WriteToFile(choicerCoef, listCriteriaCoef, listObjectCoef, objectRating);
 
             return (objectRating.IndexOf(objectRating.Max()), objectRating);
         }
 
-        private void WriteToFile(List<double> choicerCoef, List<List<double>> listCriteriaCoef, List<List<double>> listObjectCoef)
+        private void WriteToFile(List<double> choicerCoef, List<List<double>> listCriteriaCoef, List<List<double>> listObjectCoef, List<double> obejctRating)
         {
             var path = @"D:\Education\4 course\TPR\result.txt";
 
@@ -129,6 +129,7 @@ namespace Topic1Solver
             var stringLine = choicerCoef.Select(x => x.ToString()).Aggregate((x, y) => $"{x}; {y}");
             File.AppendAllText(path, Environment.NewLine);
             File.AppendAllText(path, stringLine);
+            File.AppendAllText(path, Environment.NewLine);
 
             File.AppendAllText(path, "Criteria coef");
             File.AppendAllText(path, Environment.NewLine);
@@ -147,6 +148,12 @@ namespace Topic1Solver
                 File.AppendAllText(path, stringLine);
                 File.AppendAllText(path, Environment.NewLine);
             }
+
+            File.AppendAllText(path, "Objects rating");
+            stringLine = obejctRating.Select(x => x.ToString()).Aggregate((x, y) => $"{x}; {y}");
+            File.AppendAllText(path, Environment.NewLine);
+            File.AppendAllText(path, stringLine);
+            File.AppendAllText(path, Environment.NewLine);
         }
     }
 }
